@@ -1,5 +1,6 @@
 import {
 	IExecuteFunctions,
+	IDataObject,
 	INodeExecutionData,
 	INodeType,
 	INodeTypeDescription,
@@ -12,7 +13,7 @@ export class VippsMobilepay implements INodeType {
 		displayName: 'Vipps MobilePay',
 		name: 'vippsMobilepay',
 		icon: 'file:vippsmobilepay.svg',
-		group: ['finance'],
+		group: ['transform'],
 		version: 1,
 		subtitle: '={{$parameter["operation"]}}',
 		description: 'Interact with the Vipps MobilePay ePayment API',
@@ -221,7 +222,7 @@ export class VippsMobilepay implements INodeType {
 					);
 				}
 
-				returnData.push({ json: responseData as Record<string, unknown> });
+				returnData.push({ json: responseData as IDataObject });
 			} catch (error) {
 				if (this.continueOnFail()) {
 					returnData.push({ json: { error: (error as Error).message }, pairedItem: i });
